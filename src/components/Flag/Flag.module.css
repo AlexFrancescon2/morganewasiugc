@@ -1,0 +1,25 @@
+.flag {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  overflow: hidden;
+  border-radius: 50%;
+  isolation: isolate;
+}
+
+.flag svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Soft top-left sheen and a hairline ring, so the flag reads like a glossy button */
+.flag::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 90% at 28% 18%, rgb(255 255 255 / 0.45) 0%, rgb(255 255 255 / 0) 55%),
+    radial-gradient(100% 100% at 50% 100%, rgb(0 0 0 / 0.14) 0%, rgb(0 0 0 / 0) 60%);
+  box-shadow: inset 0 0 0 1px rgb(32 32 48 / 0.18);
+  pointer-events: none;
+}

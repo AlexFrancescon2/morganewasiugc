@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Design tokens
+   Two layers:
+   1. Primitives  – raw values (the palette, the scale). Never used in components.
+   2. Semantic    – what a value is FOR. Components only use these.
+   To re-theme a section, override semantic tokens on a wrapper
+   (see .theme-inverse at the bottom).
+   ========================================================================== */
+
+:root {
+  /* ---- Primitives: colour --------------------------------------------- */
+  --blue-50:  #F5F9FF;
+  --blue-100: #DFECFF;   /* main baby blue */
+  --blue-200: #C8DAF6;
+  --blue-300: #A9B6E2;
+  --blue-500: #7880B5;   /* medium blue */
+  --blue-700: #454A70;
+  --blue-900: #202030;   /* dark blue */
+  --blue-950: #16161F;
+  --white:    #FFFFFF;
+  --yolk:     #FFD66B;   /* signal only: availability dot */
+
+  /* ---- Semantic: colour ----------------------------------------------- */
+  --color-bg:            var(--blue-100);
+  --color-bg-raised:     var(--blue-50);
+  --color-bg-sunken:     var(--blue-200);
+  --color-bg-inverse:    var(--blue-900);
+  --color-text:          var(--blue-900);
+  --color-text-muted:    var(--blue-700);
+  --color-text-inverse:  var(--blue-100);
+  --color-accent:        var(--blue-500);
+  --color-line:          color-mix(in srgb, var(--blue-900) 14%, transparent);
+  --color-line-strong:   color-mix(in srgb, var(--blue-900) 32%, transparent);
+  --color-focus:         var(--blue-900);
+  --color-signal:        var(--yolk);
+  --color-scrim:         color-mix(in srgb, var(--blue-900) 72%, transparent);
+
+  /* ---- Type ------------------------------------------------------------ */
+  --font-display: 'Young Serif', 'Iowan Old Style', Georgia, serif;
+  --font-body:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Modular scale (~1.25) with fluid display sizes */
+  --text-xs:      0.8125rem;
+  --text-sm:      0.9375rem;
+  --text-base:    1.0625rem;
+  --text-md:      1.25rem;
+  --text-lg:      1.5625rem;
+  --text-xl:      clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --text-2xl:     clamp(2.5rem, 1.4rem + 4vw, 4.5rem);
+  --text-display: clamp(3.25rem, 1.5rem + 7.2vw, 8.75rem);
+
+  --leading-display: 0.96;
+  --leading-tight:   1.12;
+  --leading-snug:    1.3;
+  --leading-body:    1.6;
+  --tracking-display: -0.025em;
+  --tracking-tight:   -0.01em;
+
+  /* ---- Space (4px base) ------------------------------------------------ */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.5rem;
+  --space-6:  2rem;
+  --space-7:  3rem;
+  --space-8:  4.5rem;
+  --space-9:  6rem;
+  --space-10: 8rem;
+
+  /* ---- Shape ----------------------------------------------------------- */
+  --radius-sm:   6px;
+  --radius-md:   14px;
+  --radius-tile: 22px;
+  --radius-lg:   28px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation ------------------------------------------------------- */
+  --shadow-card:  0 30px 60px -28px rgb(32 32 48 / 0.45);
+  --shadow-float: 0 40px 90px -30px rgb(32 32 48 / 0.6);
+
+  /* ---- Layout ---------------------------------------------------------- */
+  --container: 1320px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-space: clamp(5rem, 10vw, 9rem);
+
+  /* ---- Layers ---------------------------------------------------------- */
+  --z-nav: 50;
+  --z-modal: 100;
+}
+
+/* Section-level theme swap: put this class on any dark section. */
+.theme-inverse {
+  --color-bg:         var(--blue-900);
+  --color-bg-raised:  var(--blue-950);
+  --color-text:       var(--blue-100);
+  --color-text-muted: var(--blue-300);
+  --color-line:       color-mix(in srgb, var(--blue-100) 16%, transparent);
+  --color-line-strong: color-mix(in srgb, var(--blue-100) 36%, transparent);
+  --color-focus:      var(--blue-100);
+  background: var(--color-bg);
+  color: var(--color-text);
+}

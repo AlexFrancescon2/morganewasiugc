@@ -1,0 +1,262 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
+  align-items: center;
+  gap: var(--space-6);
+  min-height: 100svh;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding: calc(var(--space-10) + var(--space-3)) var(--gutter) var(--space-8);
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-6);
+  justify-items: start;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-raised);
+  box-shadow: 0 0 0 1px var(--color-line);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.dot {
+  position: relative;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-signal);
+  box-shadow: 0 0 0 1px rgb(32 32 48 / 0.25);
+}
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-signal);
+  animation: ping 2.4s var(--ease-out, ease-out) infinite;
+}
+@keyframes ping {
+  0% { transform: scale(0.6); opacity: 1; }
+  80%, 100% { transform: scale(1.7); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dot::after { animation: none; opacity: 0; }
+}
+
+.title {
+  font-family: var(--font-display);
+  /* Smaller than --text-display so the portrait shares the first screen */
+  font-size: clamp(3rem, 1rem + 5.4vw, 7rem);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+.lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+/* The middle line steps in, so the headline reads like it's being plated. */
+.lineMask:nth-child(2) { padding-left: 0.85em; }
+
+.line { display: block; }
+
+.intro {
+  max-width: 36ch;
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.primary {
+  display: inline-flex;
+  padding: 0.95rem 1.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+.primary:hover { background: var(--blue-700); }
+.primary:active { transform: scale(0.97); }
+
+.secondary {
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: var(--color-accent);
+  transition: text-decoration-color 0.2s;
+}
+.secondary:hover { text-decoration-color: currentColor; }
+
+.proof {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+.proof strong { color: var(--color-text); font-weight: 600; }
+.proof:hover span { color: var(--color-text); }
+
+/* ---- Portrait + floating cards --------------------------------------- */
+.visual {
+  position: relative;
+  height: clamp(32rem, 52vw, 46rem);
+  perspective: 1100px;
+}
+
+.portrait {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* `translate` composes with Motion's transform, so centering never fights it */
+  translate: -50% -50%;
+  width: min(80%, 28rem);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+  box-shadow: 0 0 0 6px var(--blue-50), var(--shadow-float);
+}
+
+.sticker {
+  position: absolute;
+  top: 6%;
+  left: 2%;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: clamp(5.5rem, 9vw, 7.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-card);
+}
+.sticker > svg:first-child {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: currentColor;
+}
+.stickerMark {
+  grid-area: 1 / 1;
+  width: 24%;
+  color: var(--color-signal);
+}
+
+.slot {
+  position: absolute;
+  z-index: 3;
+  width: clamp(8rem, 11vw, 10.5rem);
+  aspect-ratio: 9 / 16;
+}
+.slotA { left: 0; bottom: 4%; }
+.slotB { right: 0; top: 14%; }
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-tile);
+  box-shadow: 0 0 0 4px var(--blue-50), var(--shadow-float);
+  transform-style: preserve-3d;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-3);
+  color: var(--white);
+  background: linear-gradient(to top, rgb(32 32 48 / 0.72) 0%, transparent 45%),
+    linear-gradient(to bottom, rgb(32 32 48 / 0.35) 0%, transparent 25%);
+}
+
+.handle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.avatar {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--blue-100);
+  box-shadow: 0 0 0 1.5px var(--white);
+}
+
+.caption {
+  margin-top: auto;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+}
+
+.progress {
+  display: block;
+  height: 2px;
+  margin-top: var(--space-3);
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.3);
+  overflow: hidden;
+}
+.progressFill {
+  display: block;
+  height: 100%;
+  background: var(--white);
+  transform-origin: left;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: var(--space-5);
+    min-height: auto;
+    padding-top: calc(var(--space-9) + var(--space-3));
+  }
+  /* Flatten the copy so the portrait can sit right under the headline */
+  .copy { display: contents; }
+  .visual { order: 1; justify-self: stretch; }
+  .intro,
+  .actions,
+  .proof { order: 2; }
+  .visual { height: clamp(26rem, 118vw, 38rem); }
+  .portrait { width: min(72%, 24rem); }
+  .slot { width: clamp(6.5rem, 24vw, 9rem); }
+  .overlay { padding: var(--space-2); }
+  .handle { font-size: 0.6875rem; }
+  .caption { font-size: var(--text-xs); }
+  .sticker { width: clamp(4.75rem, 20vw, 6rem); }
+}

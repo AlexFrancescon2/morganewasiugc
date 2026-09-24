@@ -1,0 +1,94 @@
+.media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--ph-bg);
+  color: var(--ph-ink);
+  isolation: isolate;
+}
+
+/* Film grain so flat gradients feel photographic */
+.placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Category silhouette */
+.placeholder::before {
+  content: '';
+  grid-area: 1 / 1;
+  background: rgb(255 255 255 / 0.28);
+  box-shadow:
+    inset 0 0 0 clamp(6px, 1.4vw, 12px) rgb(255 255 255 / 0.18),
+    0 30px 40px -22px rgb(32 32 48 / 0.45);
+}
+.placeholder[data-kind='recipes']::before   { width: 64%; aspect-ratio: 1; border-radius: 50%; }
+.placeholder[data-kind='beauty']::before    { width: 24%; aspect-ratio: 1 / 2.5; border-radius: 999px 999px 16px 16px; }
+.placeholder[data-kind='books']::before     { width: 50%; aspect-ratio: 3 / 4.3; border-radius: 4px 12px 12px 4px; }
+.placeholder[data-kind='lifestyle']::before { width: 56%; aspect-ratio: 1; border-radius: 30%; }
+.placeholder[data-kind='portrait']::before {
+  align-self: end;
+  width: 78%;
+  aspect-ratio: 1 / 1.05;
+  background:
+    radial-gradient(circle at 50% 30%, rgb(255 255 255 / 0.42) 0 21%, transparent 21.5%),
+    radial-gradient(ellipse 50% 42% at 50% 100%, rgb(255 255 255 / 0.36) 0 99%, transparent 100%);
+  box-shadow: none;
+}
+
+.label {
+  position: absolute;
+  inset: auto 0 var(--space-5);
+  z-index: 3;
+  text-align: center;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.play {
+  grid-area: 1 / 1;
+  width: clamp(2.25rem, 18%, 3.25rem);
+  z-index: 1;
+}
+
+.placeholder[data-tone='sky'] {
+  --ph-ink: var(--blue-900);
+  --ph-bg:
+    radial-gradient(90% 60% at 22% 12%, var(--white) 0%, transparent 60%),
+    linear-gradient(165deg, var(--blue-100) 0%, var(--blue-300) 100%);
+}
+.placeholder[data-tone='mist'] {
+  --ph-ink: var(--blue-900);
+  --ph-bg:
+    radial-gradient(80% 50% at 80% 85%, var(--blue-500) 0%, transparent 70%),
+    linear-gradient(200deg, var(--blue-50) 0%, var(--blue-200) 100%);
+}
+.placeholder[data-tone='dusk'] {
+  --ph-ink: var(--blue-50);
+  --ph-bg:
+    radial-gradient(70% 45% at 30% 20%, var(--blue-300) 0%, transparent 70%),
+    linear-gradient(170deg, var(--blue-500) 0%, var(--blue-700) 100%);
+}
+.placeholder[data-tone='night'] {
+  --ph-ink: var(--blue-100);
+  --ph-bg:
+    radial-gradient(60% 40% at 70% 25%, var(--blue-500) 0%, transparent 75%),
+    linear-gradient(180deg, var(--blue-700) 0%, var(--blue-900) 100%);
+}

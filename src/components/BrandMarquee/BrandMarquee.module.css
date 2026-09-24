@@ -1,0 +1,31 @@
+.band {
+  padding: var(--space-5) 0;
+  overflow: hidden;
+}
+
+.viewport {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding-right: var(--space-6);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mark {
+  width: 0.55em;
+  height: 0.55em;
+  color: var(--blue-500);
+}
